@@ -1,0 +1,25 @@
+<section data-ng-controller="SellersController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="seller.name"></h1>
+	</div>
+    <div class="page-content">
+        <h1 data-ng-bind="seller.title"></h1>
+        <p data-ng-bind="seller.description"></p>
+    </div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == seller.user._id))">
+		<a class="btn btn-primary" href="/#!/sellers/{{seller._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="seller.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="seller.user.displayName"></span>
+		</em>
+	</small>
+</section>

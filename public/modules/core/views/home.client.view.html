@@ -1,0 +1,72 @@
+<section data-ng-controller="SellersController" data-ng-init="find()">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-12">
+                Sellers
+            </div>
+        </div>
+    </div>
+
+
+    <ul id="vidseller-area" class="row">
+        <li data-ng-repeat="seller in sellers"  class="col-xs-12 col-md-3 col-sm-4">
+            <div class = "vidwrapper">
+            <div class="headerwrapper">
+                <div class ="row">
+                    <div class="col-md-5">
+                      <a><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span> </a>4
+                        |
+                        <a><span class="glyphicon glyphicon-share" aria-hidden="true"></span> </a>
+                    </div>
+                    <div class="col-md-7 vidlink">
+                        <a class="pull-right" data-ng-href="#!/sellers/{{seller._id}}">Live Video Chat</a>
+                    </div>
+                </div>
+                </div>
+                <div class="post-media">
+
+                    <!-- Decorational Triangle -->
+                    <div class="triangle-wrap"></div>
+
+                    <!-- include post format media content -->
+
+                    <!-- Post Image Overlay -->
+                    <div class="image-overlay">	</div>
+                    <img width="1050" height="697" src="/modules/core/img//pics/tea.jpg" alt="Cup of Coffee">
+
+                    <!-- Post Thumbnail -->
+                </div>
+            <div class="vid">
+                <a data-ng-href="#!/sellers/{{seller._id}}" >
+            <h3 class="post-title" data-ng-bind="seller.title"></h3>
+                <p>
+                    <span class="post-category">creative, legal</span>
+                </p>
+
+                <div class="testimonial-wrap clear">
+                    <h5><strong data-ng-bind="seller.name"></strong></h5>
+                    <!--<p data-ng-bind="seller.duration">Fantastic product, my sites all run super fast and the support is excellent! Great to work with, good communications skills.</p>-->
+                    <p data-ng-bind="seller.description" style="margin-bottom: 5px"></p>
+                </div>
+
+                    <small class="list-group-item-text pull-right costdetials">
+                        <span class="costdesc" data-ng-bind="seller.cost | currency:number:0 "></span><br>
+                        <span class="durationdesc text-muted">Per <span data-ng-bind="seller.duration"></span> Min</span>
+
+                    </small>
+
+                    <!--<small class="list-group-item-text">-->
+                    <!--Posted on-->
+                    <!--<span data-ng-bind="seller.created | date:'medium'"></span>-->
+                    <!--by-->
+                    <!--<span data-ng-bind="seller.user.displayName"></span>-->
+                <!--</small>-->
+                    </a>
+            </div>
+            </div>
+        </li>
+    </ul>
+    <div class="alert alert-warning text-center" data-ng-hide="!sellers.$resolved || sellers.length">
+        No Sellers yet, why don't you <a href="/#!/sellers/create">create one</a>?
+    </div>
+</section>
