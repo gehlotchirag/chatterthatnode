@@ -1,4 +1,5 @@
-ChatterThat App Provides Video based interaction
+## ChatterThat
+ChatterThat App is a platform to provide Video based interaction with Experts.
 
 ## Before You Begin 
 Before you begin we recommend you read about the basic building blocks that assemble a MEAN.JS application: 
