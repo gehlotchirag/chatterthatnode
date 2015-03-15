@@ -1,22 +1,111 @@
 'use strict';
 
 // Sellers controller
-angular.module('sellers').controller('SellersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sellers',
-	function($scope, $stateParams, $location, Authentication, Sellers) {
+angular.module('sellers').controller('SellersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sellers','$modal', '$log',
+	function($scope, $stateParams, $location, Authentication, Sellers, $modal, $log) {
+
+        $scope.events = [
+            {
+                title: 'All Day Event',
+                start: '2015-03-01'
+            },
+            {
+                title: 'Long Event',
+                start: '2015-03-07',
+                end: '2015-03-10'
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2015-03-09T16:00:00'
+            },
+            {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2015-03-16T16:00:00'
+            },
+            {
+                title: 'Conference',
+                start: '2015-03-11',
+                end: '2015-03-13'
+            },
+            {
+                title: 'Meeting',
+                start: '2015-03-12T10:30:00',
+                end: '2015-03-12T12:30:00'
+            },
+            {
+                title: 'Lunch',
+                start: '2015-03-12T12:00:00'
+            },
+            {
+                title: 'Meeting',
+                start: '2015-03-12T14:30:00'
+            },
+            {
+                title: 'Happy Hour',
+                start: '2015-03-12T17:30:00'
+            },
+            {
+                title: 'Dinner',
+                start: '2015-03-12T20:00:00'
+            },
+            {
+                title: 'Birthday Party',
+                start: '2015-03-13T07:00:00'
+            },
+            {
+                title: 'Click for Google',
+                start: '2015-03-28'
+            }
+        ];
+        $scope.uiConfig = {
+            calendar:{
+                 editable: true,
+                header:{
+                    left: 'month,agendaWeek,agendaDay',
+                    center: 'title',
+                    right: 'today prev,next'
+                },
+                selectable: true,
+                selectHelper: true,
+                 select: function(start, end) {
+                     console.log (start);
+                      window.meetingtime =start;
+                    //var title = prompt('Event Title:');
+                   // if (title) {
+                        $scope.$apply(function(start, end){
+                             $scope.ModalAddEvent();
+                            //$scope.events.push({
+                            //    title: title,
+                            //    start: start,
+                            //    end: end,
+                            //    allDay: allDay
+                            //});
+                        });
+
+                    //}
+                    // should call 'unselect' method here
+                }
+            }
+        };
+        $scope.eventSources = [$scope.events];
+
+
 		$scope.authentication = Authentication;
 
 		// Create new Seller
 		$scope.create = function() {
 			// Create new Seller object
 			var seller = new Sellers ({
-                name: this.name,
+                 name: this.name,
                 title: this.title,
                 description: this.description,
                 cost: this.cost,
                 duration: this.duration
 			});
 
-			// Redirect after save
+            // Redirect after save
 			seller.$save(function(response) {
 				$location.path('sellers/' + response._id);
 
@@ -44,7 +133,19 @@ angular.module('sellers').controller('SellersController', ['$scope', '$statePara
 			}
 		};
 
-		// Update existing Seller
+        // Update existing Seller
+        $scope.updateEvent = function() {
+            $scope.ok();
+            var seller = $scope.seller;
+            seller.$update(function() {
+                $location.path('sellers/' + seller._id);
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+
+        // Update existing Seller
 		$scope.update = function() {
 			var seller = $scope.seller;
 
@@ -66,5 +167,87 @@ angular.module('sellers').controller('SellersController', ['$scope', '$statePara
 				sellerId: $stateParams.sellerId
 			});
 		};
-	}
+
+        //Modal Opener
+        $scope.ModalAddEvent = function (size) {
+
+            window.modalInstance = $modal.open({
+                templateUrl: 'modules/sellers/views/create-event-seller.client.view.html',
+                controller: 'SellersController',
+                size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+
+            });
+
+            window.modalInstance.result.then(function () {
+                //$scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+
+        };
+
+        $scope.ok = function () {
+            window.modalInstance.close();
+            console.log("closing");
+         };
+
+        $scope.cancel = function () {
+            window.modalInstance.dismiss('cancel');
+        };
+
+
+        //time related ui
+        $scope.mytime = window.meetingtime;
+
+        $scope.hstep = 1;
+        $scope.mstep = 15;
+
+        $scope.options = {
+            hstep: [1, 2, 3],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
+
+        $scope.ismeridian = true;
+        $scope.toggleMode = function() {
+            $scope.ismeridian = ! $scope.ismeridian;
+        };
+
+        //$scope.updatetime = function() {
+        //    var d = new Date();
+        //    d.setHours( 14 );
+        //    d.setMinutes( 0 );
+        //    $scope.meetingtime = d;
+        //};
+
+        $scope.changed = function () {
+             $log.log('Time changed to: ' + $scope.mytime);
+        };
+
+        $scope.clear = function() {
+            $scope.mytime = null;
+            window.meetingtime = null;
+        };
+
+        //rating
+        $scope.rate = 4;
+        $scope.max = 5;
+        $scope.isReadonly = false;
+
+        $scope.hoveringOver = function(value) {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / $scope.max);
+        };
+
+        $scope.ratingStates = [
+            {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+            ];
+
+
+
+    }
 ]);

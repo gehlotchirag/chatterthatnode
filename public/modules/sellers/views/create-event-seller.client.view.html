@@ -1,0 +1,57 @@
+<section data-ng-controller="SellersController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1 data-ng-bind="seller.title"></h1>
+    </div>
+          <div id="modaltimer" class="row">
+            <!-- left column -->
+              <div class="col-md-12 text-center">
+                  Select Time to Collaborate on <b> {{mytime | date:'fullDate'}} </b>
+                  </div>
+
+              <div class="col-md-12 text-center">
+
+
+            <!-- edit form column -->
+                <form class="form-horizontal" data-ng-submit="updateEvent()" novalidate>
+                    <div class="col-md-8 col-md-offset-4">
+                    <timepicker  ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                        </div>
+
+                    <pre class="alert alert-warning">Appointment on : {{mytime | date:'medium' }}</pre>
+
+                    <div class = "col-md-5">
+                            <div class="well">
+                                <span class="glyphicon glyphicon-user seller-sm-profile"></span>{{user.displayName}}
+                            </div>
+                    </div>
+
+                        <div class = "col-md-2 text-center">
+                            <span class="glyphicon glyphicon-arrow-right pointer-arrow orange" aria-hidden="true"></span><br>
+                            <span class="text-muted">connecting</span>
+
+                        </div>
+
+                    <div class = "col-md-5">
+                        <div class="well">
+                            <span class="glyphicon glyphicon-user seller-sm-profile"></span>{{seller.user.displayName}}
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                         <div class="col-md-12 col-md-offset-4">
+                            <input class="btn btn-warning" type="submit" value="Save Changes" type="button">
+                            <span></span>
+                         </div>
+                    </div>
+
+                         <div data-ng-show="error" class="text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                 </form>
+            </div>
+
+          </div>
+
+</section>

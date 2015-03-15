@@ -1,11 +1,32 @@
 <section data-ng-controller="SellersController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="seller.name"></h1>
+        <h1 data-ng-bind="seller.title"></h1>
 	</div>
     <div class="page-content">
-        <h1 data-ng-bind="seller.title"></h1>
-        <p data-ng-bind="seller.description"></p>
+        <div class = "row">
+            <div class = "col-md-5">
+                <img src="/modules/core/img/brand/logo.png" alt="Chatter That" height="100"><br><br>
+                Rating: <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+
+                <h1 data-ng-bind="seller.user.displayName"></h1>
+                Description: <p data-ng-bind="seller.description"></p>
+            </div>
+            <div class = "col-md-7">
+                <div class="row pull-right">
+                    <div class = "col-md-1 col-md-offset-10">
+                    <button class="btn btn-warning"> Video Chat </button>
+                </div>
+                <br><br>
+                     <div id="cal" class="well">
+                    <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+                    </div>
+
+            </div>
+
     </div>
+
+
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == seller.user._id))">
 		<a class="btn btn-primary" href="/#!/sellers/{{seller._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -14,7 +35,10 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
+
+
+
+    <small>
 		<em class="text-muted">
 			Posted on
 			<span data-ng-bind="seller.created | date:'mediumDate'"></span>

@@ -19,7 +19,8 @@ var SellerSchema = new Schema({
     display: {
         type: String,
         default: ''
-     },    name: {
+     },
+    name: {
 		type: String,
 		default: '',
 		required: 'Please fill Seller name',
@@ -43,6 +44,15 @@ var SellerSchema = new Schema({
         required: 'Please fill Seller cost',
         trim: true
     },
+    events: [
+        {
+            title: String,
+            start: Date,
+            end: Date,
+            with: String,
+            accepted:Boolean
+        }
+    ],
     created: {
 		type: Date,
 		default: Date.now
