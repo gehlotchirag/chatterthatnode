@@ -1,7 +1,7 @@
 'use strict';
 
 // Configuring the Articles module
-angular.module('sellers',['ui.calendar' , 'ui.bootstrap']).run(['Menus',
+angular.module('sellers').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
 		//Menus.addMenuItem('topbar', 'Sellers', 'sellers', 'dropdown', '/sellers(/create)?');

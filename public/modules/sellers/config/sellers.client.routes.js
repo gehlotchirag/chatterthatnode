@@ -17,6 +17,10 @@ angular.module('sellers').config(['$stateProvider',
 			url: '/sellers/:sellerId',
 			templateUrl: 'modules/sellers/views/view-seller.client.view.html'
 		}).
+            state('videochatSeller', {
+                url: '/sellers/:sellerId/videochat',
+                templateUrl: 'modules/sellers/views/videochat.view.html'
+            }).
 		state('editSeller', {
 			url: '/sellers/:sellerId/edit',
 			templateUrl: 'modules/sellers/views/edit-seller.client.view.html'

@@ -1,0 +1,36 @@
+
+<section data-ng-controller="SellersController" data-ng-init="findOne()">
+    <div ng-hide="true" id="vichatid">{{seller._id}}</div>
+    <div ng-hide="true" id="vichattime">{{seller.duration}}</div>
+    <div class="page-header">
+        <h1 data-ng-bind="seller.title"></h1>
+        <span class="glyphicon glyphicon-time" aria-hidden="true" id="timeicon" style="display: none"></span>
+        <span id="time"></span>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+                <div class="pull-right">
+                    <b>Name:</b> {{seller.name}}<br>
+                    <b>Topic:</b> {{seller.title}}
+                </div>
+
+                <div class="videoContainer">
+                    <video id="localVideo" style="height: 100%;" oncontextmenu="return false;"></video>
+                    <div id="localVolume" class="volume_bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+                <div class="pull-right">
+                    <!--<b>Name: {{seller.name}}<br>-->
+                        <!--<b>Topic: {{seller.title}}-->
+                </div>
+                <div id="remotes"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../../../public/lib/SimpleWebRTC/simplewebrtc.bundle.js"></script>
+<script src="../../../public/lib/SimpleWebRTC/myownchat.js"></script>
