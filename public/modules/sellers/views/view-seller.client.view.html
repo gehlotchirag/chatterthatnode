@@ -5,7 +5,7 @@
     <div class="page-content">
         <div class = "row">
             <div class = "col-md-5">
-                <img src="/modules/core/img/brand/logo.png" alt="Chatter That" height="100"><br><br>
+                <img src="/modules/core/img/brand/logo.png" alt="Chatter That" width="250"><br><br>
                 Rating: <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
                 <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
 
