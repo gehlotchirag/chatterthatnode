@@ -14,8 +14,8 @@ module.exports = {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
-                'public/lib/bootstrap/dist/css/bootstrap-theme.css',
-                'public/lib/fullcalendar/fullcalendar.css'
+        'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+        'public/lib/fullcalendar/fullcalendar.css'
 			],
 			js: [
         'public/lib/jquery/dist/jquery.js',
