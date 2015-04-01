@@ -33,7 +33,7 @@ module.exports = {
         'public/lib/angular-ui-utils/ui-utils.js',
  				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
         'public/lib/angular-ui-calendar/src/calendar.js',
-        'public/lib/angular-socialshare/angular-socialshare.min.js',
+        'public/lib/socialshare/angular-socialshare.min.js',
         'public/lib/fullcalendar/fullcalendar.js',
         'public/lib/SimpleWebRTC/socket.io.js'
       ]
