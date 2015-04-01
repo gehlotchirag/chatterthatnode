@@ -6,7 +6,7 @@ module.exports = {
 		description: 'Chatterthat.com- A marketplace for video chat',
 		keywords: 'Chatterthat, Video chat'
 	},
-	port: process.env.PORT || 3000,
+	port: process.env.PORT || 80,
 	templateEngine: 'swig',
 	sessionSecret: 'MEAN',
 	sessionCollection: 'sessions',
