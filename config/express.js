@@ -22,6 +22,9 @@ var fs = require('fs'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
 	path = require('path');
+var multer  = require('multer');
+var done=false;
+
 
 module.exports = function(db) {
 	// Initialize express app
@@ -127,7 +130,35 @@ module.exports = function(db) {
 		require(path.resolve(routePath))(app);
 	});
 
-	// Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
+    /*Configure the multer.*/
+
+    app.use(multer({ dest: 'uploads/',
+        limits: {
+            fieldNameSize: 999999999,
+            fieldSize: 999999999
+        },
+        rename: function (fieldname, filename) {
+            return filename+Date.now();
+        },
+        onFileUploadStart: function (file) {
+            console.log(file.originalname + ' is starting ...')
+        },
+        onFileUploadComplete: function (file) {
+            console.log(file.fieldname + ' uploaded to  ' + file.path)
+            done=true;
+        }
+    }));
+
+    app.post('/api/upload',function(req,res){
+        if(done==true){
+            console.log(req.files);
+            console.log(req.body);
+            res.end("File uploaded.");
+        }
+    });
+
+
+    // Assume 'not found' in the error msgs is a 404. this is somewhat silly, but valid, you can do whatever you like, set properties, use instanceof etc.
 	app.use(function(err, req, res, next) {
 		// If the error object doesn't exists
 		if (!err) return next();

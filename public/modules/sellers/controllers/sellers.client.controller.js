@@ -13,7 +13,7 @@ angular.module('sellers').controller('SellersController', ['$scope', '$statePara
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     $upload.upload({
-                        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                        url: 'api/upload',
                         fields: {'user': $scope.user},
                         file: file
                     }).progress(function (evt) {

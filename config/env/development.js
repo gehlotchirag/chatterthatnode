@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://localhost/chatterthat-dev',
 	app: {
-		title: 'chatterthat - Development Environment'
+		title: 'chatterthat - A marketplace for video chat'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
